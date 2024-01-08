@@ -1,0 +1,17 @@
+.container {
+    background-color:blue;
+    padding: 40px;
+    border: 2px;
+    border-color: gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+.bold-text {
+    text-decoration: solid;
+}
+.error-message{ 
+    color:red;
+    margin-top: 1rem;
+}

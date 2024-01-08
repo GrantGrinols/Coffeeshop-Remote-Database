@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            Yeah Yeah Coffee
+        </title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+        <div class="container bold-text"><h1>Yeah Yeah Coffee</h1></div>
+        <div class="container">Welcome to our coffeeshop! Since 2012, we have been dedicated in providing a welcoming and personalized experience for every single one of our guest.
+            From a slice of cake to a cup of coffee, we provide every sweet and pick-me-up you might need to help dazzle your day. Can we get a Yeah Yeah to Yeah Yeah Coffee? (YEAH!)<br><br>
+            <h3>NEW personlized experience</h3>
+            Due to the booming success of our business, we will now be offering 3 new services. <br>
+            1. You can now enter your information below so our staff know your order by just saying "give me the usual" <br>
+            2. Free coffee on your birthday! Get a coupon on your birthday month in your inbox for free coffee! Yeah! <br>
+            3. Check the birthday tab to see all the other lucky patrons that were born on the same day as you.
+        </div>
+        <div class="container">
+            <h3 class="text-center">Get a Yeah from Us!</h3>
+            <span class="text-center">Enter to be emailed for promo emails, including your free favorite drink on your birthday month!</span>
+            <span class="text-center">If your email is already in our system, you'll update your favorite drink instead</span><br>
+            <form id="userForm">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" min="2" required>
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" min="2" required> <br>
+            <label for="email">Email</label>
+            <input type="email" id="email" min="2" required>
+            <label for="birthday">Birthday</label>
+            <input type="date" id="birthday" min="2" required> 
+            <span class="error-message" id="birthdateError"></span>
+            <br>
+            <label for="drink">Drink</label>
+            <select id="drink" name="drink">
+                <option value="coffee">Coffee</option>
+                <option value="hot_chocolate">Hot Chocolate</option>
+                <option value="smoothie">Fruity Tooty Smoothie</option>
+                <option value="expresso">Expresso</option>
+                <option value="iced_tea">Iced Tea</option>
+            </select>
+            <button type="button" onclick="submitForm()">Click for a Yeah</button>
+            <div class="text-center">
+            <p id="thankYouMessage"  class="text-center">Thank You!</p>
+            </div>
+            </form>
+        </div>
+        <script>
+            function submitForm(){
+            var minNumber = 3;
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var email = document.getElementById('email').value;
+            var drink = document.getElementById('drink').value;
+            var birthday = document.getElementById('birthday').value;
+            var birthdateError = document.getElementById('birthdateError');
+            if(firstName.length < 3 || lastName.length < 3 || email.length < 3 || birthday == null || birthday == ""){
+                return;
+            }
+
+            const today = new Date().toISOString().split('T')[0];
+
+            if(birthday > today){
+                birthdateError.textContent = 'This date must be before today';
+                return;
+            }
+            console.log("sending infomation");
+            //sets up the UserData OBJECT
+            var data = {
+                "firstName": firstName,
+                "lastName": lastName,
+                "email": email,
+                "drink": drink,
+                "birthday": birthday
+            };
+            var xhr = new XMLHttpRequest();//used to POST the data to /saveUserData, found in the UserDataController, as a UserData object
+            xhr.open("POST","/saveUserData", true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState === XMLHttpRequest.DONE){
+                    if(xhr.status === 200){
+                        document.getElementById('userForm').reset();
+                        document.getElementById('thankYouMessage').style.display = 'flex';
+                    } else{
+                        console.log('Error', xhr.statusText);
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(data));
+            }
+        </script>
+    </body>
+</html>

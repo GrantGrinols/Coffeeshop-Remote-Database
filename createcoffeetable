@@ -1,0 +1,1 @@
+CREATE TABLE CustomerTable (ID int AUTO_INCREMENT, FirstName varchar(255), FirstName varchar(255) NOT NULL, LastName varchar(255) NOT Null, Birthday DATE, Email varchar(255), FavoriteDrink varchar(255), Primary KEY (ID))
