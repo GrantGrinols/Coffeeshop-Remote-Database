@@ -8,7 +8,10 @@
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <div class="container bold-text"><h1>Yeah Yeah Coffee</h1></div>
+        <div class="container"><h1 class="bold-text"><img src="/images/StockImage1.png" height="100" width="100" class="fade-in"> Yeah Yeah Coffee <img src="/images/StockImage2.png" height="100" width="100" class="fade-in"></h1>
+        <nav>
+           <a href="/" class="fade-in">Home</a><a href="/birthday" class="fade-in">Birthday</a> 
+        </nav></div>
         <div class="container">Welcome to our coffeeshop! Since 2012, we have been dedicated in providing a welcoming and personalized experience for every single one of our guest.
             From a slice of cake to a cup of coffee, we provide every sweet and pick-me-up you might need to help dazzle your day. Can we get a Yeah Yeah to Yeah Yeah Coffee? (YEAH!)<br><br>
             <h3>NEW personlized experience</h3>
@@ -19,7 +22,7 @@
         </div>
         <div class="container">
             <h3 class="text-center">Get a Yeah from Us!</h3>
-            <span class="text-center">Enter to be emailed for promo emails, including your free favorite drink on your birthday month!</span>
+            <span class="text-center">Enter to be sent promo emails, including your free favorite drink on your birthday month!</span>
             <span class="text-center">If your email is already in our system, you'll update your favorite drink instead</span><br>
             <form id="userForm">
             <label for="firstName">First Name</label>
@@ -40,9 +43,9 @@
                 <option value="expresso">Expresso</option>
                 <option value="iced_tea">Iced Tea</option>
             </select>
-            <button type="button" onclick="submitForm()">Click for a Yeah</button>
+            <button type="button" id="button" onclick="submitForm()">Click for a Yeah</button>
             <div class="text-center">
-            <p id="thankYouMessage"  class="text-center">Thank You!</p>
+            <p id="thankYouMessage"  class="text-center" style="display: none;">Thank you for your patronage!</p>
             </div>
             </form>
         </div>
@@ -56,6 +59,7 @@
             var birthday = document.getElementById('birthday').value;
             var birthdateError = document.getElementById('birthdateError');
             if(firstName.length < 3 || lastName.length < 3 || email.length < 3 || birthday == null || birthday == ""){
+                birthdateError.textContent = 'All of the form must be filled!';
                 return;
             }
 
@@ -89,6 +93,16 @@
             };
             xhr.send(JSON.stringify(data));
             }
+            document.addEventListener("DOMContentLoaded", function () {
+
+                setTimeout(function () {
+                    var fadeElements = document.querySelectorAll('.fade-in');
+                    console.log(fadeElements.length)
+                    fadeElements.forEach(function (element){
+                        element.classList.add('active');
+                    });
+                }, 500);
+            })
         </script>
     </body>
 </html>

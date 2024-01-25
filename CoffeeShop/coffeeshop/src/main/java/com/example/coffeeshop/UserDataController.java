@@ -3,7 +3,18 @@ package com.example.coffeeshop;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonParser;
+
 import java.sql.*;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.json.JSONArray;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 
 @RestController
@@ -95,10 +106,35 @@ public class UserDataController {
             e.printStackTrace();
         }
     }
+    private List<String> GetConfigs(){
+        try{
+            System.out.println("printing");
+        String filepath = "[path to configs.json]";
+
+        FileReader reader = new FileReader(filepath);
+
+        JSONTokener tokener = new JSONTokener(reader);
+
+        List<String> configs = new ArrayList<>();
+        JSONObject jsonObject = new JSONObject(tokener);
+        configs.add(jsonObject.getString("host"));
+        configs.add(jsonObject.getString("database"));
+        configs.add(jsonObject.getString("user"));
+        configs.add(jsonObject.getString("password"));
+
+        return configs;
+        
+        
+    }catch(Exception e){
+        e.printStackTrace();
+        return null;
+    }
+    }
     public Connection MakeConnection(){
-        String dbURL="jdbc:mariadb://10.0.0.184:3306/COFFEEDATABASE";
-        String username = "grantgrinols";
-        String password = "grant";
+        List<String> configs = GetConfigs();
+        String dbURL="jdbc:mariadb://"+configs.get(0)+":3306/"+configs.get(1);
+        String username = configs.get(2);
+        String password = configs.get(3);
 
         Connection connection = null;
         try {

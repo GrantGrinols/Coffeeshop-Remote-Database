@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https:www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            Yeah Yeah Coffee
+        </title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+        <div class="container"><h1 class="bold-text"><img src="/images/StockImage1.png" height="100" width="100" class="fade-in">YEAH YEAH Coffee<img src="/images/StockImage2.png" height="100" width="100" class="fade-in"></h1>
+            <nav>
+                <a href="/" class="fade-in">Home</a><a href="/birthday" class="fade-in">Birthday</a> 
+             </nav>
+        </div>
+        <div class="container"><h3>Happy birthday to all of our wonderful people!!!</h3>
+
+                <div th:each="fullName : ${fullNames}">
+                    <span th:text="${fullName[0]}"></span> <span th:text="${fullName[1]}"></span>  
+                </div>
+                <div th:text="${message}" class="text-center"></div>
+
+                <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+setTimeout(function () {
+    var fadeElements = document.querySelectorAll('.fade-in');
+    console.log(fadeElements.length)
+    fadeElements.forEach(function (element){
+        element.classList.add('active');
+    });
+}, 500);
+});
+                </script>
+    </body>
+</html>

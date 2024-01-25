@@ -1,6 +1,6 @@
 .container {
-    background-color:blue;
-    padding: 40px;
+    background-color:tan;
+    padding: 20px;
     border: 2px;
     border-color: gray;
     display: flex;
@@ -14,4 +14,32 @@
 .error-message{ 
     color:red;
     margin-top: 1rem;
+}
+.text-center{
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+nav > a {
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }

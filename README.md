@@ -1,7 +1,7 @@
 # Coffeeshop Remote Database
  A full-stack project that connects to a remote database. Powered by the Springboot framework
  ## About
- This project uses a Mariadb Database that is located on a remote location. The remote location is a Raspberry Pi 4. By having the database in a remote location rather then just having it on a local machine, increases security by storing the database in a more secure location, and it allows multiple verified users to access the same database without having the need to set it up in the cloud.
+ This project uses a Mariadb Database that is located on a remote location. The remote location is a Raspberry Pi 4. By having the database in a remote location rather then just having it on a local machine, increases security by storing the database in a more secure location, and it allows multiple verified users to access the same database without having the need to set it up in the cloud. This project is hosted with the Springboot framework, and testing is done in Python with the Selenium and the unittest library.
  ## Setup
 
  This project does require additional setup. 
@@ -29,5 +29,5 @@ and add the line:
 
 sql-mode="NO_ENGINE_SUBSTITUTION"
 
+selenium_test.py and UserDataController.java has a placeholder to the path towards config.json, so be sure to replace the path to config.json with your path
 
-You should be good to go!
